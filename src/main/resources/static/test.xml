@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:fulfillmentOrder xmlns:ns0="http://www.mst.macys.com/main/eos/fulfillmentOrder/orderDetails.v1.1">
+    <ns0:orderID>490048499</ns0:orderID>
+    <ns0:orderTypeCode>Digital</ns0:orderTypeCode>
+    <ns0:partnerOrderID>SAN10000137</ns0:partnerOrderID>
+    <ns0:orderStatus>Created</ns0:orderStatus>
+    <ns0:messageCreateTimeStamp>2017-08-16T15:20:29.657-04:00</ns0:messageCreateTimeStamp>
+    <ns0:fulfillmentChannelCode>POOL</ns0:fulfillmentChannelCode>
+    <ns0:orderStatusCode>110</ns0:orderStatusCode>
+    <ns0:orderStatusDescription>IN_PROCESS</ns0:orderStatusDescription>
+    <ns0:sellZLDivisionNbr>71</ns0:sellZLDivisionNbr>
+    <ns0:sellZLLocationNbr>139</ns0:sellZLLocationNbr>
+    <ns0:source>
+        <ns0:clientID>MCOM</ns0:clientID>
+        <ns0:subClientID>SITE</ns0:subClientID>
+        <ns0:sellingChannelCode>MCOM</ns0:sellingChannelCode>
+        <ns0:seperatorSource0>0</ns0:seperatorSource0>
+        <ns0:separatorSource1>1</ns0:separatorSource1>
+    </ns0:source>
+    <ns0:orderTotals>
+        <ns0:totalPurchaseAmount>41.95</ns0:totalPurchaseAmount>
+        <ns0:seperatorOrderTotals0>0</ns0:seperatorOrderTotals0>
+    </ns0:orderTotals>
+    <ns0:billingAddress>
+        <ns0:contact>
+            <ns0:custID>51238851</ns0:custID>
+            <ns0:name>
+                <ns0:firstName>SUPRAJA</ns0:firstName>
+                <ns0:lastName>CHIDURAL</ns0:lastName>
+                <ns0:seperatorName0>0</ns0:seperatorName0>
+                <ns0:seperatorName1>1</ns0:seperatorName1>
+            </ns0:name>
+            <ns0:address>
+                <ns0:line1>2200 Galvin Dr</ns0:line1>
+                <ns0:line2>2200 Galvin Dr</ns0:line2>
+                <ns0:line3>2200 Galvin Dr</ns0:line3>
+                <ns0:city>BUFORD</ns0:city>
+                <ns0:state>GA</ns0:state>
+                <ns0:zipCode>30087</ns0:zipCode>
+                <ns0:countryCode>USA</ns0:countryCode>
+                <ns0:seperatorAddress0>0</ns0:seperatorAddress0>
+            </ns0:address>
+            <ns0:daytimePhoneNbr>968-789-87642345</ns0:daytimePhoneNbr>
+            <ns0:homePhoneNbr>968-789-8764</ns0:homePhoneNbr>
+            <ns0:alternatePhoneNbr>741-119-3501</ns0:alternatePhoneNbr>
+            <ns0:sendSMSMessage>false</ns0:sendSMSMessage>
+            <ns0:emailAddress>SUPRAJA.CHIDURAL@MACYS.COM</ns0:emailAddress>
+            <ns0:seperatorContact0>0</ns0:seperatorContact0>
+        </ns0:contact>
+    </ns0:billingAddress>
+</ns0:fulfillmentOrder>
