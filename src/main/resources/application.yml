@@ -11,3 +11,6 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+  cloud:
+    gcp:
+      project-id: firstcoloudpubsu-1641885915064

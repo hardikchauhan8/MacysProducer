@@ -7,10 +7,7 @@ import com.macys.macysordermessageproducer.service.MOMessageProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -27,28 +24,21 @@ public class MOMessageProducerController {
 
     @PostMapping(value = "/xml",
             consumes = {MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<Boolean> produceXmlMessage(@RequestBody FulfillmentOrder fulfillmentOrder) {
-        return messageService.produceXmlMessage(fulfillmentOrder);
+    public ResponseEntity<Boolean> produceXmlMessage(@RequestBody FulfillmentOrder fulfillmentOrder, @RequestHeader("x-messaging-queue") String queue) {
+        if(queue.equalsIgnoreCase("gcp")){
+            return messageService.produceXmlMessageGCP(fulfillmentOrder);
+        } else {
+            return messageService.produceXmlMessageRabbitmq(fulfillmentOrder);
+        }
     }
 
     @PostMapping(value = "/json",
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Boolean> produceJsonMessage(@RequestBody OrderMessageJson orderMessageJson) {
-        return messageService.produceJsonMessage(orderMessageJson);
-    }
-
-    void getLocalXml() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream soapXML = classLoader.getResourceAsStream("static/test.xml");
-        XMLInputFactory f = XMLInputFactory.newFactory();
-        XMLStreamReader sr = null;
-        try {
-            sr = f.createXMLStreamReader(soapXML);
-            XmlMapper mapper = new XmlMapper();
-            FulfillmentOrder fulfillmentOrder = mapper.readValue(sr, FulfillmentOrder.class);
-
-        } catch (XMLStreamException | IOException e) {
-            e.printStackTrace();
+    public ResponseEntity<Boolean> produceJsonMessage(@RequestBody OrderMessageJson orderMessageJson, @RequestHeader("x-messaging-queue") String queue) {
+        if(queue.equalsIgnoreCase("gcp")){
+            return messageService.produceJsonMessageGCP(orderMessageJson);
+        } else {
+            return messageService.produceJsonMessageRabbitmq(orderMessageJson);
         }
     }
 }

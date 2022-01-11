@@ -10,7 +10,6 @@ import com.macys.macysordermessageproducer.service.MOMessageProducerService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,15 +39,6 @@ class MOMessageProducerControllerTest {
     @Autowired
     MOMessageProducerController controller;
 
-    @Autowired
-    private QueueSender queueSender;
-
-    @Mock
-    private FulfillmentOrder fulfillmentOrder;
-
-    @Mock
-    private OrderMessageJson orderMessageJson;
-
     @Test
     void testContollerNotNull() {
         Assertions.assertNotNull(controller);
@@ -56,8 +46,8 @@ class MOMessageProducerControllerTest {
 
     @Test
     void testServiceProduceXmlMessage() throws Exception {
-
-        given(service.produceXmlMessage(fulfillmentOrder)).willReturn(new ResponseEntity<>(true, HttpStatus.OK));
+        FulfillmentOrder fulfillmentOrder = new FulfillmentOrder();
+        given(service.produceXmlMessageRabbitmq(fulfillmentOrder)).willReturn(new ResponseEntity<>(true, HttpStatus.OK));
 
         XmlMapper xmlMapper = new XmlMapper();
         String xmlString = xmlMapper.writeValueAsString(fulfillmentOrder);
@@ -71,8 +61,8 @@ class MOMessageProducerControllerTest {
 
     @Test
     void testServiceProduceXJsonMessage() throws Exception {
-
-        given(service.produceJsonMessage(orderMessageJson)).willReturn(new ResponseEntity<>(true, HttpStatus.OK));
+        OrderMessageJson orderMessageJson = new OrderMessageJson();
+        given(service.produceJsonMessageRabbitmq(orderMessageJson)).willReturn(new ResponseEntity<>(true, HttpStatus.OK));
 
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = objectMapper.writeValueAsString(orderMessageJson);
@@ -84,13 +74,4 @@ class MOMessageProducerControllerTest {
                 .andDo(print());
     }
 
-    @Test
-    void testXmlMessageSender() {
-        queueSender.send(fulfillmentOrder);
-    }
-
-    @Test
-    void testJsonMessageSender() {
-        queueSender.send(orderMessageJson);
-    }
 }

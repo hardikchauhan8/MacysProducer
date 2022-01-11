@@ -3,10 +3,13 @@ package com.macys.macysordermessageproducer.service;
 import com.macys.macysordermessageproducer.dto.json.OrderMessageJson;
 import com.macys.macysordermessageproducer.dto.xml.FulfillmentOrder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 public interface MOMessageProducerService {
-    ResponseEntity<Boolean> produceXmlMessage(FulfillmentOrder fulfillmentOrder);
+    ResponseEntity<Boolean> produceXmlMessageRabbitmq(FulfillmentOrder fulfillmentOrder);
 
-    ResponseEntity<Boolean> produceJsonMessage(OrderMessageJson orderMessageJson);
+    ResponseEntity<Boolean> produceJsonMessageRabbitmq(OrderMessageJson orderMessageJson);
+
+    ResponseEntity<Boolean> produceXmlMessageGCP(FulfillmentOrder fulfillmentOrder);
+
+    ResponseEntity<Boolean> produceJsonMessageGCP(OrderMessageJson orderMessageJson);
 }
