@@ -54,7 +54,8 @@ class MOMessageProducerControllerTest {
 
         mvc.perform(post("/macy/producer/xml")
                         .content(xmlString)
-                        .contentType(MediaType.APPLICATION_XML_VALUE))
+                        .contentType(MediaType.APPLICATION_XML_VALUE)
+                        .header("x-messaging-queue", "gcp"))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
@@ -69,7 +70,8 @@ class MOMessageProducerControllerTest {
 
         mvc.perform(post("/macy/producer/json")
                         .content(jsonString)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header("x-messaging-queue", "rabbitmq"))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
