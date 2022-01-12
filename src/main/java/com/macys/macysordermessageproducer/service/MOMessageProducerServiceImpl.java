@@ -4,6 +4,7 @@ import com.macys.macysordermessageproducer.component.GcpSender;
 import com.macys.macysordermessageproducer.component.QueueSender;
 import com.macys.macysordermessageproducer.dto.json.OrderMessageJson;
 import com.macys.macysordermessageproducer.dto.xml.FulfillmentOrder;
+import com.macys.macysordermessageproducer.util.PayloadConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class MOMessageProducerServiceImpl implements MOMessageProducerService {
     @Override
     public ResponseEntity<Boolean> produceXmlMessageGCP(FulfillmentOrder fulfillmentOrder) {
         try {
-            gcpSender.publishXml(fulfillmentOrder);
+            gcpSender.publishXml(PayloadConverter.convertXmlPayload(fulfillmentOrder));
             return new ResponseEntity<>(true, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +55,7 @@ public class MOMessageProducerServiceImpl implements MOMessageProducerService {
     @Override
     public ResponseEntity<Boolean> produceJsonMessageGCP(OrderMessageJson orderMessageJson) {
         try {
-            gcpSender.publishJson(orderMessageJson);
+            gcpSender.publishJson(PayloadConverter.convertJsonPayload(orderMessageJson));
             return new ResponseEntity<>(true, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

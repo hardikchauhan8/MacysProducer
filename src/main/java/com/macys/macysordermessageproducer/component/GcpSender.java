@@ -1,7 +1,5 @@
 package com.macys.macysordermessageproducer.component;
 
-import com.macys.macysordermessageproducer.dto.json.OrderMessageJson;
-import com.macys.macysordermessageproducer.dto.xml.FulfillmentOrder;
 import com.macys.macysordermessageproducer.util.GCPConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gcp.pubsub.core.PubSubTemplate;
@@ -13,11 +11,11 @@ public class GcpSender {
     @Autowired
     private PubSubTemplate pubSubTemplate;
 
-    public void publishXml(FulfillmentOrder fulfillmentOrder) {
+    public void publishXml(String fulfillmentOrder) {
         pubSubTemplate.publish(GCPConstants.GCP_XML_TOPIC, fulfillmentOrder);
     }
 
-    public void publishJson(OrderMessageJson orderMessageJson) {
+    public void publishJson(String orderMessageJson) {
         pubSubTemplate.publish(GCPConstants.GCP_JSON_TOPIC, orderMessageJson);
     }
 }
