@@ -24,10 +24,10 @@ public class QueueSender {
     private Queue xmlQueue;
 
     public void send(FulfillmentOrder fulfillmentOrder) throws AmqpException {
-        jsonAmqpTemplate.convertAndSend(xmlQueue.getName(), fulfillmentOrder);
+        xmlAmqpTemplate.convertAndSend(xmlQueue.getName(), fulfillmentOrder);
     }
 
     public void send(OrderMessageJson orderMessageJson) throws AmqpException {
-        xmlAmqpTemplate.convertAndSend(jsonQueue.getName(), orderMessageJson);
+        jsonAmqpTemplate.convertAndSend(jsonQueue.getName(), orderMessageJson);
     }
 }
